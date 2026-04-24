@@ -3,7 +3,6 @@
 **Status:** Active
 **Hardware:** Raspberry Pi 5 (8GB)
 **Started:** 2025
-**Source code:** [matt-bey/elk-antique-telephone-ai-operator](https://github.com/matt-bey/elk-antique-telephone-ai-operator)
 
 Convert a Kellogg Chicago antique wood wall telephone (early 1900s) into a fully functional AI-powered communication device. A Raspberry Pi 5 handles crank detection, a 1920s-style AI telephone operator interaction (speech recognition → LLM → TTS), and outgoing/incoming VoIP calls via SIP — all while preserving the authentic look and feel of the original hardware.
 
@@ -73,4 +72,3 @@ Crank detected
 
 - [HARDWARE.md](HARDWARE.md) — bill of materials, wiring, and power budget
 - [SOFTWARE.md](SOFTWARE.md) — setup, configuration, and architecture details
-- [Source repo](https://github.com/matt-bey/elk-antique-telephone-ai-operator)
