@@ -1,0 +1,75 @@
+[project]
+name = "antique-telephone-ai-operator"
+version = "0.1.0"
+description = "Convert a 1920s Kellogg telephone into an AI-powered VoIP device"
+requires-python = ">=3.11"
+dependencies = [
+    # Core
+    "numpy>=1.21.0",
+    "scipy>=1.7.0",
+    # Audio I/O
+    # Note: pyaudio requires system PortAudio: brew install portaudio (Mac) or apt install portaudio19-dev (Pi)
+    "pyaudio>=0.2.11",
+    "soundfile>=0.10.0",
+    # GPIO — RPi.GPIO only installs on ARM (Pi); gpiozero provides simulation fallback on dev machines
+    "gpiozero>=1.6.0",
+    "RPi.GPIO>=0.7.0; platform_machine=='armv7l' or platform_machine=='aarch64'",
+    # AI & Speech
+    # openai-whisper provides the `whisper` module for local STT — no API key needed
+    "openai-whisper>=20230314",
+    "requests>=2.25.0",
+    # Utilities
+    "psutil>=5.8.0",
+    "python-dotenv>=0.19.0",
+    "pyyaml>=5.4.0",
+    "colorlog>=6.0.0",
+    "httpx>=0.24.0",
+    "jsonschema>=3.2.0",
+    "python-dateutil>=2.8.0",
+    # VoIP: pyVoIP is pure Python (pip-installable, no native build step)
+    "piper-tts>=1.4.1",
+    "ollama>=0.6.1",
+    "anthropic>=0.86.0",
+    "aiohttp>=3.9.0",
+    "pyvoip>=1.6.8",
+    # audioop was removed in Python 3.13; pyVoIP imports it internally.
+    # audioop-lts is a community backport that restores the module.
+    "audioop-lts>=0.2.1; python_version>='3.13'",
+    "soxr>=1.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=6.0.0",
+    "pytest-cov>=2.10.0",
+    "pytest-asyncio>=0.15.0",
+    "pytest-timeout>=2.0.0",
+    "flake8>=3.8.0",
+    "black>=21.0.0",
+    "mypy>=0.800",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["src"]
+timeout = 15
+markers = [
+    "hardware: tests that require physical hardware (Raspberry Pi)",
+    "integration: tests that require live external APIs",
+]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
